@@ -1,17 +1,25 @@
+import React from 'react';
 import './TodoCounter.css';
 
 function TodoCounter({ total, completed }){
-  let res;
-  if(total===completed){
-    res = `Felicidades! has completado todos los TODOs`
-  }else{
-    res = `Has completado <span>${completed}</span> de <span>${total}</span> TODOs`
+  
+  const allComplete = total === completed
+  const titulo = {
+    true: <h1 className='TodoCounter'>
+            Felicidades! Has completado todos los TODOs
+          </h1>,
+    false: <h1 className='TodoCounter'>
+              Has completado <span>{completed}</span> de <span>{total}</span> TODOs
+            </h1>, 
   }
   return(
     <h1 className='TodoCounter'>
-      {res}
+      {/* Has completado <span>{completed}</span> de <span>{total}</span> TODOs */}
+      {titulo[allComplete]}
     </h1>
   );
+  
+  
 }
 
 export { TodoCounter }

@@ -18,16 +18,19 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
 
   //estados derivados
+  //todos completos
   const completedTodos = todos.filter(todo => !!todo.completed).length;
+  //todos totales listados
   const totalTodos = todos.length;
 
+  //todos buscados
   const searchedTodos = todos.filter((todo) =>{
     const todoText = todo.text.toLowerCase();
     const searchText = searchValue.toLowerCase()
     return todoText.includes(searchText)
   })
   
-  //buscar cual todo se clickeo complete V y actualizar
+  //Completar 1 todo (buscar cual todo se clickeo complete V y actualizar)
   const completeTodo = (text)=>{
     const newTodos = [...todos];
     const indexTodo = newTodos.findIndex((todo) => todo.text === text)
@@ -35,6 +38,7 @@ function App() {
     setTodos(newTodos);
   }
 
+  //Eliminar 1 todo
   const deleteTodo = (text)=>{
     const newTodos = [...todos];
     const indexTodo = newTodos.findIndex((todo) => todo.text === text)
