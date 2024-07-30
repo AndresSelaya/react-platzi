@@ -16,17 +16,31 @@ import React from 'react';
 // localStorage.setItem('TODOS_v1', JSON.stringify(defaultTodos))
 // localStorage.removeItem('TODOS_v1')
 
-function App() {
-  const localStorageTodos = localStorage.getItem('TODOS_v1');
-  let parsedTodos;
-  if(!localStorageTodos){
-    localStorage.setItem('TODOS_v1', JSON.stringify([]))
-    parsedTodos = []; 
+function useLocalStorage(itemName, initialValue){
+  
+  const localStorageItem = localStorage.getItem(itemName, initialValue);
+  let parsedItem;
+  if(!localStorageItem){
+    localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedItem = initialValue; 
   }else{
-    parsedTodos = JSON.parse(localStorageTodos);
+    parsedItem = JSON.parse(localStorageItem);
+  }
+  
+  const [item, setItem] = React.useState(parsedItem)
+  
+  const saveItem = (newItem) =>{
+    localStorage.setItem(itemName, JSON.stringify(newItem))
+    setItem(newItem);
   }
 
-  const [todos, setTodos] = React.useState(parsedTodos);
+  return [item, saveItem]
+}
+
+function App() {
+  
+
+  const [todos, saveTodos] = useLocalStorage('TODOS_v1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
   //estados derivados
@@ -42,10 +56,7 @@ function App() {
     return todoText.includes(searchText)
   })
   
-  const saveTodos = (newTodos) =>{
-    localStorage.setItem('TODOS_v1', JSON.stringify(newTodos))
-    setTodos(newTodos);
-  }
+  
 
 
   //Completar 1 todo (buscar cual todo se clickeo complete V y actualizar)
