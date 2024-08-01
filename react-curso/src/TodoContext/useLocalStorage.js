@@ -43,3 +43,14 @@ function useLocalStorage(itemName, initialValue){
   }
 
 export { useLocalStorage }
+
+// const defaultTodos = [
+//   {text:'Cortar cebolla', completed: true},
+//   {text:'Curso react.js', completed: false},
+//   {text:'Tarea 1', completed: false},
+//   {text:'Lalala', completed: false},
+//   {text:'tarea 2', completed: true}
+// ]
+
+// localStorage.setItem('TODOS_v1', JSON.stringify(defaultTodos))
+// localStorage.removeItem('TODOS_v1')
