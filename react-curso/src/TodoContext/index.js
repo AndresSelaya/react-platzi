@@ -13,6 +13,7 @@ function TodoProvider({ children }){
       
     
     const [searchValue, setSearchValue] = React.useState('');
+    const [openModal, setOpenModal] = React.useState(false);
     
     //estados derivados
     //todos completos
@@ -52,7 +53,9 @@ function TodoProvider({ children }){
             setSearchValue,
             searchedTodos,
             completeTodo,
-            deleteTodo
+            deleteTodo,
+            openModal,
+            setOpenModal
         }}>
             {children}
         </TodoContext.Provider>
