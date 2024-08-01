@@ -28,11 +28,21 @@ function TodoProvider({ children }){
         return todoText.includes(searchText)
     })
       
+    const addTodo = (text)=>{
+        const newTodos = [...todos];
+        newTodos.push({
+            text,
+            completed: false
+        })
+        saveTodos(newTodos);
+    }
+
     //Completar 1 todo (buscar cual todo se clickeo complete V y actualizar)
     const completeTodo = (text)=>{
         const newTodos = [...todos];
         const indexTodo = newTodos.findIndex((todo) => todo.text === text)
-        newTodos[indexTodo].completed = true;
+        // newTodos[indexTodo].completed = true;
+        newTodos[indexTodo].completed = !newTodos[indexTodo].completed;
         saveTodos(newTodos);
     }
     
@@ -55,7 +65,8 @@ function TodoProvider({ children }){
             completeTodo,
             deleteTodo,
             openModal,
-            setOpenModal
+            setOpenModal,
+            addTodo
         }}>
             {children}
         </TodoContext.Provider>
